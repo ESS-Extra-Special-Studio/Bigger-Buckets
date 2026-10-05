@@ -1,3 +1,6 @@
 tools/out/
 __pycache__/
 .tmp_*
+
+# Release zips (tools/package.ps1)
+dist/

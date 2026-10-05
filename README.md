@@ -51,7 +51,7 @@ To check that it loaded, look in `RSDragonwilds\Binaries\Win64\ue4ss\UE4SS.log` 
 
 `[Bigger Buckets] Loaded 1.0.0`
 
-followed by one `Capacity 150 -> 450` style line per container once you are in a world.
+followed by one `Capacity 150 -> 450` style line per container a few seconds later, at the main menu.
 
 ## Multiplayer
 
