@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 (unreleased)
+## 1.0.0 (2026-10-05)
 
 - The Compost Bucket holds 3 times as much per fill by default: 450 instead of 150, about a 3x3 bed instead of 3 plots.
 - Every watering can holds 3 times as much by default and keeps its tier: Wooden 600, Bronze 750, Steel 900, Adamant 1050, Rune 1200.
