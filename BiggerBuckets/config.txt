@@ -1,0 +1,14 @@
+; Bigger Buckets settings. Save this file, then restart the game.
+;
+; Each number multiplies how much a container holds per fill. 1 = vanilla.
+; Allowed: 1 to 20. Decimals are fine, e.g. 2.5.
+; How fast a container pours is not changed, only how long it lasts.
+
+; Compost Bucket. Vanilla holds 150, about 3 plots per fill.
+; 3 = 450, about 9 plots: a whole 3x3 bed from one fill.
+compost_bucket = 3
+
+; Every watering can (Wooden, Bronze, Steel, Adamant, Rune). Each keeps its tier.
+; Vanilla holds 200 / 250 / 300 / 350 / 400.
+; 3 = 600 / 750 / 900 / 1050 / 1200.
+watering_cans = 3
