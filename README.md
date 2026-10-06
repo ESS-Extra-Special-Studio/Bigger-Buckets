@@ -30,7 +30,7 @@ compost_bucket = 3
 watering_cans = 3
 ```
 
-Each number multiplies how much that container holds. `1` is vanilla, the allowed range is 1 to 20, and decimals such as `2.5` work. Restart the game after editing. A missing or broken value falls back to 3, and the reason is written to the log.
+Each number multiplies how much that container holds. `1` is vanilla, the allowed range is 1 to 20, and decimals such as `2.5` work. Restart the game after editing. A missing setting uses 3. A value that isn't a number also uses 3, and a number outside 1 to 20 is clamped to the nearest end; both are noted in the log.
 
 ## Requirements
 
