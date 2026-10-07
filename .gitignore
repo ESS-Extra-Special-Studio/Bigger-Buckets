@@ -4,3 +4,11 @@ __pycache__/
 
 # Release zips (tools/package.ps1)
 dist/
+
+# Dev-only tooling and switches: never committed (a local pre-push hook blocks them too)
+**/dev_prob[e]*
+**/devkey[s]*
+**/dev-keys*
+**/dev.txt
+**/dev-unlock.txt
+**/debug.txt
