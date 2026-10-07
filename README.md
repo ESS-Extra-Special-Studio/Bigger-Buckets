@@ -45,7 +45,7 @@ The CurseForge app installs Dragonwilds mods into:
 
 `RSDragonwilds\RSDragonwilds\Content\Paks\~mods`
 
-Bigger Buckets is the `BiggerBuckets` folder in there. If your UE4SS only loads Lua mods from `RSDragonwilds\Binaries\Win64\ue4ss\Mods`, put the folder there instead.
+Bigger Buckets is the `BiggerBuckets` folder in there: `enabled.txt`, `config.txt`, `Scripts\main.lua`, and `README.txt`, `CHANGELOG.txt` and `LICENSE.txt`. If your UE4SS only loads Lua mods from `RSDragonwilds\Binaries\Win64\ue4ss\Mods`, put the folder there instead.
 
 To check that it loaded, look in `RSDragonwilds\Binaries\Win64\ue4ss\UE4SS.log` for:
 

@@ -3,7 +3,8 @@
 # Only files tracked by git AND matching $Allow are packed, so logs and local
 # test files can never ship. config.txt ships: it is the player's settings
 # file, with the default x3. The zip holds one BiggerBuckets folder, ready to
-# drop into Content\Paks\~mods.
+# drop into Content\Paks\~mods. CurseForge only accepts .txt .lua .dll .pak
+# .utoc .ucas in a Dragonwilds UE4SS mod, so the docs ship as .txt copies.
 #   powershell -File tools\package.ps1 -Version 1.0.0
 param([Parameter(Mandatory = $true)][string]$Version)
 $ErrorActionPreference = "Stop"
@@ -16,7 +17,9 @@ $Allow = @(
     "^$mod/config\.txt$",
     "^$mod/Scripts/[a-z_]+\.lua$"
 )
-$Docs = @('README.md', 'LICENSE', 'CHANGELOG.md')
+# Repo file -> name in the zip.
+$Docs = [ordered]@{ 'README.md' = 'README.txt'; 'LICENSE' = 'LICENSE.txt'; 'CHANGELOG.md' = 'CHANGELOG.txt' }
+$AllowedTypes = '\.(txt|lua|dll|pak|utoc|ucas)$'
 $Never = '(^|/)(dev|debug)\.txt$|\.log$|\.tmp$'
 
 $tracked = git ls-files
@@ -40,7 +43,9 @@ foreach ($f in $files) {
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $to) | Out-Null
     Copy-Item -LiteralPath (Join-Path $repo $f) -Destination $to
 }
-foreach ($d in $Docs) { Copy-Item -LiteralPath (Join-Path $repo $d) -Destination (Join-Path $stage "$mod\$d") }
+foreach ($d in $Docs.Keys) { Copy-Item -LiteralPath (Join-Path $repo $d) -Destination (Join-Path $stage "$mod\$($Docs[$d])") }
+$wrongType = Get-ChildItem -LiteralPath $stage -Recurse -File -Force | Where-Object { $_.Name -notmatch $AllowedTypes }
+if ($wrongType) { throw "Refusing to pack file types CurseForge rejects: $(($wrongType | ForEach-Object Name) -join ', ')" }
 
 $zip = Join-Path $repo "dist\$mod-$Version.zip"
 if (Test-Path $zip) { Remove-Item -Force $zip }
@@ -54,4 +59,7 @@ try {
     }
 } finally { $archive.Dispose() }
 Remove-Item -Recurse -Force $stage
+$check = [IO.Compression.ZipFile]::OpenRead($zip)
+try { $bad = @($check.Entries | Where-Object { $_.Name -and $_.Name -notmatch $AllowedTypes } | ForEach-Object FullName) } finally { $check.Dispose() }
+if ($bad) { Remove-Item -Force $zip; throw "Zip removed, it held file types CurseForge rejects: $($bad -join ', ')" }
 Write-Output "Packed $($files.Count + $Docs.Count) files into $zip"

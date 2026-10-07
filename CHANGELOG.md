@@ -16,3 +16,4 @@ The first release.
 
 - Adamant and Rune cans are changed when their region's content loads.
 - Any other container the game adds is logged and left unchanged, so a game update can't quietly leave one small.
+- The readme, changelog and licence ship as `.txt`, so the zip only holds file types CurseForge accepts for Dragonwilds UE4SS mods. `tools\package.ps1` refuses any other type.
